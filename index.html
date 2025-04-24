@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>С Днём Рождения, Максим!</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -12,47 +16,46 @@
       background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
       color: #333;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     h1 {
       font-size: 2.5em;
-      margin-top: 30px;
-      padding: 0 10px;
+      margin: 20px;
     }
 
     p {
       font-size: 1.2em;
       margin: 20px auto;
+      padding: 0 20px;
       max-width: 600px;
-      padding: 0 10px;
     }
 
     .main-image {
       display: block;
       margin: 20px auto;
-      max-width: 200px;
+      max-width: 80%;
+      height: auto;
       border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
     }
 
     .main-image:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
     button {
-      padding: 12px 25px;
-      font-size: 1em;
+      padding: 15px 30px;
+      font-size: 1.1em;
       background-color: #ff6f61;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      margin: 20px auto;
-      display: block;
-      z-index: 10;
+      margin: 20px;
       position: relative;
+      z-index: 1000;
     }
 
     button:hover {
@@ -94,35 +97,41 @@
         font-size: 2em;
       }
 
-      .main-image {
-        max-width: 150px;
+      p {
+        font-size: 1em;
       }
 
       button {
-        font-size: 0.9em;
-        padding: 10px 20px;
+        font-size: 1em;
+        padding: 12px 24px;
+      }
+
+      .main-image {
+        max-width: 90%;
       }
     }
   </style>
 </head>
 <body>
   <h1>С Днём Рождения, Максим! 🎉</h1>
-
-  <img class="main-image" src="images/photo_2025-04-24_17-23-09.jpg" alt="Фото для Максима" />
-
+  <img class="main-image" src="images/photo_2025-04-24_17-23-09.jpg" alt="Фото для Максима">
   <p>
     Бро, пусть этот год принесёт тебе кучу энергии, крутых открытий и настоящих побед! ✨<br>
     Пусть в жизни будет больше кайфа, настоящих людей рядом и пусть твоя мечта становится ближе каждый день.
   </p>
-
   <button onclick="launchEffects()">Сделай день незабываемым! 🎁</button>
 
-  <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-buddy.mp3" autoplay loop></audio>
+  <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-buddy.mp3" loop></audio>
 
   <script>
     function launchEffects() {
+      const music = document.getElementById('bgMusic');
+      if (music.paused) {
+        music.play().catch(e => console.log("Не удалось воспроизвести аудио:", e));
+      }
+
       // Шарики
-      for (let i = 0; i < 50; i++) {
+      for (let i = 0; i < 60; i++) {
         const b = document.createElement('div');
         b.className = 'balloon';
         b.style.left = Math.random() * 100 + 'vw';
@@ -133,7 +142,7 @@
       }
 
       // Конфетти
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 120; i++) {
         const c = document.createElement('div');
         c.className = 'confetti';
         c.style.left = Math.random() * 100 + 'vw';
@@ -148,8 +157,3 @@
   </script>
 </body>
 </html>
-   
-    
-       
-
-  
