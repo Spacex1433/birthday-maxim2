@@ -12,18 +12,20 @@
       background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
       color: #333;
       text-align: center;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     h1 {
       font-size: 2.5em;
       margin-top: 30px;
+      padding: 0 10px;
     }
 
     p {
       font-size: 1.2em;
       margin: 20px auto;
       max-width: 600px;
+      padding: 0 10px;
     }
 
     .main-image {
@@ -57,55 +59,34 @@
       background-color: #ff3b2e;
     }
 
-    .cake-container {
-      margin: 40px auto;
-      position: relative;
-      width: 100px;
-      height: 150px;
-    }
-
-    .cake {
-      width: 100px;
-      height: 100px;
-      background: #ff9aa2;
-      border-radius: 10px;
+    .balloon {
       position: absolute;
-      bottom: 0;
-    }
-
-    .candle {
-      width: 10px;
-      height: 40px;
-      background: #ffd700;
-      position: absolute;
-      top: -40px;
-      left: 45px;
-      border-radius: 3px;
-    }
-
-    .flame {
-      position: absolute;
-      top: -20px;
-      left: -5px;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #ffdf00 0%, #ffa500 60%, transparent 70%);
+      width: 60px;
+      height: 60px;
+      background: red;
       border-radius: 50%;
-      animation: flicker 1s infinite;
-      transform-origin: center;
+      animation: floatUp 6s ease-in-out forwards;
+      z-index: 1;
     }
 
-    @keyframes flicker {
-      0% { transform: scale(1) translateY(0px); opacity: 1; }
-      50% { transform: scale(1.1) translateY(-2px); opacity: 0.8; }
-      100% { transform: scale(1) translateY(0px); opacity: 1; }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: gold;
+      opacity: 0.8;
+      animation: riseUp 3s linear forwards;
+      z-index: 0;
     }
 
-    .wish {
-      display: none;
-      font-size: 1.4em;
-      color: #d62828;
-      margin-top: 30px;
+    @keyframes floatUp {
+      0% { transform: translateY(100vh); }
+      100% { transform: translateY(-200vh); }
+    }
+
+    @keyframes riseUp {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-200vh); opacity: 0; }
     }
 
     @media (max-width: 600px) {
@@ -117,9 +98,9 @@
         max-width: 150px;
       }
 
-      .wish {
-        font-size: 1.2em;
-        padding: 0 10px;
+      button {
+        font-size: 0.9em;
+        padding: 10px 20px;
       }
     }
   </style>
@@ -134,24 +115,41 @@
     Пусть в жизни будет больше кайфа, настоящих людей рядом и пусть твоя мечта становится ближе каждый день.
   </p>
 
-  <div class="cake-container" onclick="blowOutCandle()">
-    <div class="cake"></div>
-    <div class="candle">
-      <div class="flame" id="flame"></div>
-    </div>
-  </div>
+  <button onclick="launchEffects()">Сделай день незабываемым! 🎁</button>
 
-  <div class="wish" id="wish">
-    🎉 С Днём Рождения, Макс! Пусть каждый день будет сладким, как этот торт! 🎂
-  </div>
+  <audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-buddy.mp3" autoplay loop></audio>
 
   <script>
-    function blowOutCandle() {
-      const flame = document.getElementById('flame');
-      const wish = document.getElementById('wish');
-      flame.style.display = 'none';
-      wish.style.display = 'block';
+    function launchEffects() {
+      // Шарики
+      for (let i = 0; i < 50; i++) {
+        const b = document.createElement('div');
+        b.className = 'balloon';
+        b.style.left = Math.random() * 100 + 'vw';
+        b.style.background = `hsl(${Math.random() * 360}, 80%, 60%)`;
+        b.style.animationDuration = (5 + Math.random() * 3) + 's';
+        document.body.appendChild(b);
+        setTimeout(() => b.remove(), 8000);
+      }
+
+      // Конфетти
+      for (let i = 0; i < 100; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        c.style.width = `${Math.random() * 6 + 4}px`;
+        c.style.height = `${Math.random() * 6 + 4}px`;
+        c.style.animationDuration = (2 + Math.random() * 2) + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4000);
+      }
     }
   </script>
 </body>
 </html>
+   
+    
+       
+
+  
